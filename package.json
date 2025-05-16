@@ -1,6 +1,6 @@
 {
-  "name": "lunatic-vite",
-  "private": true,
+  "name": "@renaud23/lunatic-vite",
+  "private": false,
   "version": "0.1.0",
   "type": "module",
   "files": [
@@ -43,12 +43,21 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
-  "main": "./dist/lunatic.umd.cjs",
+  "main": "./dist/lunatic.js",
   "module": "./dist/lunatic.js",
+  "publishConfig": {
+		"access": "public"
+	},
   "exports": {
-    ".": {
-      "import": "./dist/lunatic.js",
+    ".": {  
+      "types": "./dist/main.d.ts",
+      "import": "./lib/main.ts",
       "require": "./dist/lunatic.umd.cjs"
-    }
+     
+    },
+     "./main.css": {
+			"module": "./dist/styles/main.css",
+			"default": "./dist/styles/main.css"
+		}
   }
 }
