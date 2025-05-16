@@ -1,14 +1,18 @@
 {
   "name": "lunatic-vite",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc --p ./tsconfig.build.json && vite build",
+    "_format": "prettier **/*.{ts,tsx,json,scss}",
+    "format": "npm run _format -- --write",
+    "build:sass": "sass ./lib/styles/main.scss ./dist/styles/main.css",
+    "build:esm": "tsc --p ./tsconfig.build.json && vite build",
+    "build": "npm run build:esm && npm run build:sass",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -18,18 +22,26 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^22.15.18",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
-    "eslint": "^9.25.0",
+    "eslint": "^9.26.0",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
+    "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "sass": "^1.88.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "main": "./dist/lunatic.umd.cjs",
   "module": "./dist/lunatic.js",
