@@ -1,6 +1,6 @@
 import { type ComponentType, type FunctionComponent, memo } from 'react'
 
-import { useLunaticCustom } from '../../useLunatic/lunaticContext'
+import { useLunaticCustom } from '../../use-lunatic/lunaticContext'
 
 export function createCustomizableLunaticField<
   T extends Record<string, unknown>,
