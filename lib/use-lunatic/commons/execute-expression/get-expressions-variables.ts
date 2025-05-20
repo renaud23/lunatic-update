@@ -11,15 +11,23 @@ function getExpressionVariables(
   try {
     const chars = new antlr4.InputStream(expression)
     const lexer = new VtlLexer(chars)
-    return lexer.getAllTokens().reduce(function (array, { start, stop, type }) {
-      if (type === 234) {
+
+    const finded = lexer.getAllTokens().reduce(function (
+      array,
+      { start, stop, type },
+    ) {
+      if (type === 235) {
         const token = expression.substring(start, stop + 1)
+
         if (array.indexOf(token) === -1 && token in variables) {
           return [...array, token]
         }
       }
+
       return array
     }, [] as string[])
+
+    return finded
   } catch (e) {
     return []
   }

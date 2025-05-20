@@ -1,4 +1,10 @@
 @forward './base.scss';
+@forward './components/question-context.scss';
+@forward './components/question-information.scss';
+@forward './components/question-explication.scss';
+@forward './components/sequence.scss';
+@forward './components/input.scss';
+@forward './components/input-number.scss';
 @forward './components/Button.scss';
 @forward './components/fab.scss';
 @forward './components/commons/dragger.scss';

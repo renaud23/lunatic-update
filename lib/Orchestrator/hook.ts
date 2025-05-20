@@ -35,9 +35,22 @@ export function useComponents() {
 }
 
 export function useControls() {
-  const { status } = useOrchestratorContext()
+  const { status, compileControls } = useOrchestratorContext()
 
   if (status === OrchestratorStatus.EMPTY) {
     throw new Error(ERROR)
   }
+
+  return compileControls
+}
+
+export function usePagination() {
+  const { status, pager, isLastPage, isFirstPage, pageTag } =
+    useOrchestratorContext()
+
+  if (status === OrchestratorStatus.EMPTY) {
+    throw new Error(ERROR)
+  }
+
+  return { pager, isLastPage, isFirstPage, pageTag }
 }

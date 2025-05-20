@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useMemo } from 'react'
+import { type FunctionComponent, type PropsWithChildren, useMemo } from 'react'
 
 import useLunatic from '../use-lunatic'
 import type { LunaticData } from '../use-lunatic/type'
@@ -9,22 +9,31 @@ import {
   Provider,
 } from './orchestratorContext'
 
+type CustomType = Record<string, FunctionComponent<unknown>>
 export type OrchestratorProps = {
   source: LunaticSource
   data: LunaticData
+  custom?: CustomType
 }
 
 export type UseLunaticInterface = ReturnType<typeof useLunatic>
 
 function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
-  const { source, data, children } = props
+  const { source, data, custom, children } = props
+
+  const paramsIn = useMemo(() => ({ custom }), [custom])
+
   const {
     getComponents,
     goPreviousPage,
     goNextPage,
     goToPage,
     compileControls,
-  } = useLunatic(source, data, {})
+    pager,
+    pageTag,
+    isFirstPage,
+    isLastPage,
+  } = useLunatic(source, data, paramsIn)
 
   const args = useMemo<OrchestatorContext>(
     () => ({
@@ -34,8 +43,22 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
       goNextPage,
       goToPage,
       compileControls,
+      pager,
+      pageTag,
+      isFirstPage,
+      isLastPage,
     }),
-    [compileControls, getComponents, goNextPage, goPreviousPage, goToPage],
+    [
+      compileControls,
+      getComponents,
+      goNextPage,
+      goPreviousPage,
+      goToPage,
+      isFirstPage,
+      isLastPage,
+      pageTag,
+      pager,
+    ],
   )
 
   return <Provider value={args}>{children}</Provider>

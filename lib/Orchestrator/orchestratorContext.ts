@@ -14,6 +14,10 @@ export type OrchestatorContext = {
   goToPage: UseLunaticInterface['goToPage']
   compileControls: UseLunaticInterface['compileControls']
   status: OrchestratorStatus
+  pageTag?: UseLunaticInterface['pageTag']
+  isLastPage: UseLunaticInterface['isLastPage']
+  isFirstPage: UseLunaticInterface['isFirstPage']
+  pager?: UseLunaticInterface['pager']
 }
 
 const initial: OrchestatorContext = {
@@ -23,6 +27,10 @@ const initial: OrchestatorContext = {
   goToPage: () => {},
   getComponents: () => [],
   compileControls: () => ({ currentErrors: undefined, isCritical: false }),
+  pageTag: undefined,
+  pager: undefined,
+  isLastPage: false,
+  isFirstPage: false,
 }
 
 const orchestratorContext = createContext<OrchestatorContext>(initial)

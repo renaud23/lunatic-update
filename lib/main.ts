@@ -1,3 +1,12 @@
 export { Button } from './components/Button/Button'
+export { LunaticInput as Input } from './components/input/lunatic-input'
+export { LunaticInputNumber as InputNumber } from './components/input-number/lunatic-input-number'
+export { LunaticComponentSet as ComponentSet } from './components/ComponentSet/lunatic-component-set'
+export { LunaticSequence as Sequence } from './components/Sequence/lunatic-sequence'
+export { LunaticQuestionExplication as QuestionExplication } from './components/QuestionExplication/lunatic-question-explication'
+export { QuestionInformation } from './components/questions/question-information'
+export { QuestionContext } from './components/questions/question-context'
+
 export { Orchestrator } from './Orchestrator/Orchestrator'
 export { useComponents, useNavigation } from './Orchestrator/hook'
+export { LunaticComponents } from './components/lunatic-components'
