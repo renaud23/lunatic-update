@@ -18,7 +18,7 @@ type Props = {
   onChange: (s: string) => void
 }
 
-function Datepicker({
+export const Datepicker = createCustomizableLunaticField(function Datepicker({
   disabled,
   readOnly,
   value = '',
@@ -58,6 +58,4 @@ function Datepicker({
       <Errors errors={errors} />
     </DatepickerContainer>
   )
-}
-
-export default createCustomizableLunaticField(Datepicker, 'Datepicker')
+}, 'Datepicker')
