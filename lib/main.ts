@@ -8,6 +8,11 @@ export { QuestionInformation } from './components/questions/question-information
 export { QuestionContext } from './components/questions/question-context'
 export { LunaticDatepicker as Datepicker } from './components/datepicker/lunatic-datepicker'
 export { RemoteComponent } from './components/remote-component/remote-component'
+export { LunaticCheckboxBoolean as CheckboxBoolean } from './components/checkbox/checkbox-boolean/lunatic-checkbox-boolean'
+export { LunaticCheckboxGroup as CheckboxGroup } from './components/checkbox/checkbox-group/lunatic-checkbox-group'
+export { LunaticCheckboxOne as CheckboxOne } from './components/checkbox/checkbox-one/lunatic-checkbox-one'
+export { LunaticRadioGroup as Radio } from './components/radio/lunatic-radio-group'
+export { LunaticDropdown as Dropdown } from './components/dropdown/lunatic-dropdown'
 
 export { Orchestrator } from './Orchestrator/Orchestrator'
 export { useComponents, useNavigation } from './Orchestrator/hook'
