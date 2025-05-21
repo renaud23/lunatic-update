@@ -6,7 +6,7 @@ import useOnHandleChange from '../commons/use-on-handle-change'
 import type { LunaticComponentProps } from '../type'
 import { Dropdown } from './html/dropdown'
 
-function LunaticDropdown({
+export function LunaticDropdown({
   id,
   handleChange,
   options,
@@ -54,5 +54,3 @@ function LunaticDropdown({
     </LunaticComponent>
   )
 }
-
-export default LunaticDropdown
