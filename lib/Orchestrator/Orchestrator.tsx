@@ -93,11 +93,11 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
 export function Orchestrator(
   props: PropsWithChildren<Partial<OrchestratorProps>>,
 ) {
-  const { source, data, children } = props
+  const { source, data, children, ...rest } = props
 
   if (data && source) {
     return (
-      <OrchestratorOnReady source={source} data={data}>
+      <OrchestratorOnReady source={source} data={data} {...rest}>
         {children}
       </OrchestratorOnReady>
     )
