@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import type { LunaticComponentProps } from '../type'
-import Row from './row'
+import { Row } from './Row'
 
 type Props = {
   nbRows: number
