@@ -15,6 +15,7 @@ export { LunaticRadioGroup as Radio } from './components/radio/lunatic-radio-gro
 export { RosterForLoop } from './components/loop/rosterForLoop/RosterForLoop'
 export { LunaticSequence as Sequence } from './components/sequence/LunaticSequence'
 export { Subsequence } from './components/subsequence/Subsequence'
+export { LunaticSuggester as Suggester } from './components/suggester/LunaticSuggester'
 export { LunaticComponentSet as ComponentSet } from './components/ComponentSet/lunatic-component-set'
 export { LunaticQuestionExplication as QuestionExplication } from './components/QuestionExplication/lunatic-question-explication'
 export { QuestionInformation } from './components/questions/question-information'

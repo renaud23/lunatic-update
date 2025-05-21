@@ -1,6 +1,6 @@
 import LunaticComponent from '../commons/components/lunatic-component-without-label'
 import type { LunaticComponentProps } from '../type'
-import { Sequence } from './html/sequence'
+import { Sequence } from './html/Sequence'
 
 function empty() {}
 
