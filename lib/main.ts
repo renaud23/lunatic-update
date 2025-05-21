@@ -7,6 +7,7 @@ export { LunaticQuestionExplication as QuestionExplication } from './components/
 export { QuestionInformation } from './components/questions/question-information'
 export { QuestionContext } from './components/questions/question-context'
 export { LunaticDatepicker as Datepicker } from './components/datepicker/lunatic-datepicker'
+export { RemoteComponent } from './components/remote-component/remote-component'
 
 export { Orchestrator } from './Orchestrator/Orchestrator'
 export { useComponents, useNavigation } from './Orchestrator/hook'
