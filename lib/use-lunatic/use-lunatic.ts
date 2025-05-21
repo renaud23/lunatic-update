@@ -33,6 +33,52 @@ const DEFAULT_DONT_KNOW = D.DK
 const DEFAULT_REFUSED = D.RF
 const nothing = () => {}
 
+export type UseLunaticParams = {
+  features: LunaticState['features']
+  preferences: LunaticState['preferences']
+  savingType: LunaticState['savingType']
+  onChange: LunaticState['handleChange']
+  management: boolean
+  shortcut: boolean
+  initialPage: string
+  lastReachedPage: string
+  autoSuggesterLoading: boolean
+  getReferentiel: (name: string) => Promise<Array<unknown>>
+  activeControls: boolean
+  custom: Record<string, FunctionComponent<unknown>>
+  withOverview: boolean
+  missing: boolean
+  missingStrategy: () => void
+  missingShortcut: { dontKnow: string; refused: string }
+  dontKnowButton: string
+  refusedButton: string
+  // Enable workers on Micro frontend (worker deployed in another server than the current)
+  workersBasePath: string
+}
+
+export const defaultUseLunaticParams: Partial<UseLunaticParams> = {
+  features: DEFAULT_FEATURES,
+  preferences: DEFAULT_PREFERENCES,
+  savingType: COLLECTED,
+  onChange: nothing,
+  management: false,
+  shortcut: false,
+  initialPage: '1',
+  lastReachedPage: undefined,
+  autoSuggesterLoading: false,
+  activeControls: false,
+  getReferentiel: async () => [],
+  custom: empty,
+  // Calculate an overview of every sequence (will be exposed as "overview")
+  withOverview: false,
+  missing: false,
+  missingStrategy: emptyFn,
+  missingShortcut: DEFAULT_SHORTCUT,
+  dontKnowButton: DEFAULT_DONT_KNOW,
+  refusedButton: DEFAULT_REFUSED,
+  workersBasePath: undefined,
+}
+
 function useLunatic(
   source: LunaticSource,
   data: LunaticData = DEFAULT_DATA,
@@ -57,28 +103,7 @@ function useLunatic(
     dontKnowButton = DEFAULT_DONT_KNOW,
     refusedButton = DEFAULT_REFUSED,
     workersBasePath = undefined,
-  }: {
-    features?: LunaticState['features']
-    preferences?: LunaticState['preferences']
-    savingType?: LunaticState['savingType']
-    onChange?: LunaticState['handleChange']
-    management?: boolean
-    shortcut?: boolean
-    initialPage?: string
-    lastReachedPage?: string
-    autoSuggesterLoading?: boolean
-    getReferentiel?: (name: string) => Promise<Array<unknown>>
-    activeControls?: boolean
-    custom?: Record<string, FunctionComponent<unknown>>
-    withOverview?: boolean
-    missing?: boolean
-    missingStrategy?: () => void
-    missingShortcut?: { dontKnow: string; refused: string }
-    dontKnowButton?: string
-    refusedButton?: string
-    // Enable workers on Micro frontend (worker deployed in another server than the current)
-    workersBasePath?: string
-  },
+  }: Partial<UseLunaticParams>,
 ) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
   const { pager, waiting, overview, pages, executeExpression, isInLoop } = state

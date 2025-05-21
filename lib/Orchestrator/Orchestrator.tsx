@@ -1,27 +1,53 @@
-import { type FunctionComponent, type PropsWithChildren, useMemo } from 'react'
+import { type PropsWithChildren, useMemo } from 'react'
 
 import useLunatic from '../use-lunatic'
 import type { LunaticData } from '../use-lunatic/type'
 import type { LunaticSource } from '../use-lunatic/type-source'
+import type { UseLunaticParams } from '../use-lunatic/use-lunatic'
 import {
   type OrchestatorContext,
   OrchestratorStatus,
   Provider,
 } from './orchestratorContext'
 
-type CustomType = Record<string, FunctionComponent<unknown>>
 export type OrchestratorProps = {
   source: LunaticSource
   data: LunaticData
-  custom?: CustomType
-}
+} & Partial<UseLunaticParams>
 
 export type UseLunaticInterface = ReturnType<typeof useLunatic>
 
 function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
-  const { source, data, custom, children } = props
+  const {
+    source,
+    data,
+    children,
+    custom,
+    onChange,
+    getReferentiel,
+    autoSuggesterLoading,
+    initialPage,
+    workersBasePath,
+  } = props
 
-  const paramsIn = useMemo(() => ({ custom }), [custom])
+  const paramsIn = useMemo<Partial<UseLunaticParams>>(
+    () => ({
+      custom,
+      onChange,
+      getReferentiel,
+      autoSuggesterLoading,
+      initialPage,
+      workersBasePath,
+    }),
+    [
+      custom,
+      onChange,
+      getReferentiel,
+      autoSuggesterLoading,
+      initialPage,
+      workersBasePath,
+    ],
+  )
 
   const {
     getComponents,
