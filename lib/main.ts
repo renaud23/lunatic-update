@@ -6,6 +6,7 @@ export { LunaticSequence as Sequence } from './components/Sequence/lunatic-seque
 export { LunaticQuestionExplication as QuestionExplication } from './components/QuestionExplication/lunatic-question-explication'
 export { QuestionInformation } from './components/questions/question-information'
 export { QuestionContext } from './components/questions/question-context'
+export { LunaticDatepicker as Datepicker } from './components/datepicker/lunatic-datepicker'
 
 export { Orchestrator } from './Orchestrator/Orchestrator'
 export { useComponents, useNavigation } from './Orchestrator/hook'
