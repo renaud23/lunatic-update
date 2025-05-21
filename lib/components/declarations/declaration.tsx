@@ -6,7 +6,10 @@ import createCustomizableLunaticField from '../commons/create-customizable-field
 
 type Props = PropsWithChildren<{ type: string }>
 
-export function Declaration({ children, type }: Props) {
+export const Declaration = createCustomizableLunaticField(function Declaration({
+  children,
+  type,
+}: Props) {
   return (
     <div
       data-testid="declaration"
@@ -18,5 +21,4 @@ export function Declaration({ children, type }: Props) {
       {children}
     </div>
   )
-}
-export default createCustomizableLunaticField(Declaration, 'Declaration')
+}, 'Declaration')

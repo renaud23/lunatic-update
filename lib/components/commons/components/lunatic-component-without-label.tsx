@@ -1,10 +1,8 @@
 import { type ReactElement, cloneElement } from 'react'
 
-import {
-  DECLARATION_POSITIONS,
-  DeclarationsBeforeText,
-  DeclarationsDetachable,
-} from '../../declarations'
+import DeclarationsBeforeText from '../../Declarations/DeclarationsBeforeText'
+import DeclarationsDetachable from '../../Declarations/DeclarationsDetachable'
+import { DECLARATION_POSITIONS } from '../../Declarations/declarationPositions'
 import type { LunaticBaseProps } from '../../type'
 import FieldContainer from './field-container'
 import Missing from './missing'
