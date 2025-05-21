@@ -10,6 +10,7 @@ export { LunaticInputNumber as InputNumber } from './components/input-number/lun
 export { FilterDescription } from './components/FilterDescription/component'
 export { Loop } from './components/loop/Loop'
 export { ModalControls as Modal } from './components/modalControls/ModalControls'
+export { PairwiseLinks as PairwiseLinks } from './components/pairwiseLinks/PairwiseLinks'
 export { LunaticComponentSet as ComponentSet } from './components/ComponentSet/lunatic-component-set'
 export { LunaticSequence as Sequence } from './components/Sequence/lunatic-sequence'
 export { LunaticQuestionExplication as QuestionExplication } from './components/QuestionExplication/lunatic-question-explication'
