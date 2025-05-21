@@ -21,7 +21,7 @@ export function LunaticCheckboxBoolean({
   description,
 }: LunaticComponentProps<'CheckboxBoolean'>) {
   const onChange = useOnHandleChange({ handleChange, response, value })
-  console.log({ errors, computed: getComponentErrors(errors, id), id })
+
   return (
     <LunaticComponent
       id={id}
