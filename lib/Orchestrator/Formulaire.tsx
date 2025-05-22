@@ -2,7 +2,7 @@ import { LunaticComponents, useGetComponents } from '../main'
 import type { FilledLunaticComponentProps } from '../use-lunatic/commons/fill-components/fill-components'
 import type { LunaticError } from '../use-lunatic/type'
 
-type FormulaireProps = {
+export type FormulaireProps = {
   componentProps?: () => Partial<
     FilledLunaticComponentProps & {
       errors: Record<string, LunaticError[]> | undefined
