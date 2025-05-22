@@ -25,7 +25,7 @@ export { RemoteComponent } from './components/remote-component/remote-component'
 export { LunaticTable as Table } from './components/table/LunaticTable'
 
 export { Orchestrator } from './orchestrator/Orchestrator'
-export { Formulaire } from './orchestrator/Formulaire'
+export { Formulaire, type FormulaireProps } from './orchestrator/Formulaire'
 export type {
   UseLunaticInterface,
   LunaticCompiledErrors,
