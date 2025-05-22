@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 
-import type { UseLunaticInterface } from './Orchestrator'
+import type { LunaticCompiledErrors, UseLunaticInterface } from './Orchestrator'
 
 export enum OrchestratorStatus {
   EMPTY = 'EMPTY',
@@ -18,6 +18,8 @@ export type OrchestatorContext = {
   isLastPage: UseLunaticInterface['isLastPage']
   isFirstPage: UseLunaticInterface['isFirstPage']
   pager?: UseLunaticInterface['pager']
+
+  errors?: LunaticCompiledErrors
 }
 
 const initial: OrchestatorContext = {
@@ -31,6 +33,7 @@ const initial: OrchestatorContext = {
   pager: undefined,
   isLastPage: false,
   isFirstPage: false,
+  errors: undefined,
 }
 
 const orchestratorContext = createContext<OrchestatorContext>(initial)

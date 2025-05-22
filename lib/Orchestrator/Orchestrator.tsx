@@ -1,7 +1,14 @@
-import { type PropsWithChildren, useMemo } from 'react'
+import {
+  type PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 import useLunatic from '../use-lunatic'
-import type { LunaticData } from '../use-lunatic/type'
+import type { LunaticData, LunaticError } from '../use-lunatic/type'
 import type { LunaticSource } from '../use-lunatic/type-source'
 import type { UseLunaticParams } from '../use-lunatic/use-lunatic'
 import {
@@ -10,12 +17,31 @@ import {
   Provider,
 } from './orchestratorContext'
 
+function alwaysTrue() {
+  return true
+}
+
+function nothing() {}
+
+type Hooks = {
+  beforeNextPage: (args: UseLunaticInterface) => boolean
+  beforePreviousPage: (args: UseLunaticInterface) => boolean
+  afterNextPage: (args: UseLunaticInterface) => void
+  afterPreviousPage: (args: UseLunaticInterface) => void
+}
+
 export type OrchestratorProps = {
   source: LunaticSource
   data: LunaticData
-} & Partial<UseLunaticParams>
+} & Partial<UseLunaticParams> &
+  Partial<Hooks>
 
 export type UseLunaticInterface = ReturnType<typeof useLunatic>
+
+export type LunaticCompiledErrors = {
+  currentErrors: Record<string, LunaticError[]> | undefined
+  isCritical: boolean
+}
 
 function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
   const {
@@ -28,7 +54,15 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
     autoSuggesterLoading,
     initialPage,
     workersBasePath,
+    beforeNextPage = alwaysTrue,
+    beforePreviousPage = alwaysTrue,
+    afterNextPage = nothing,
+    afterPreviousPage = nothing,
   } = props
+
+  const startNextPage = useRef(false)
+  const startPreviousPage = useRef(false)
+  const [errors, setErrors] = useState<LunaticCompiledErrors>()
 
   const paramsIn = useMemo<Partial<UseLunaticParams>>(
     () => ({
@@ -49,41 +83,77 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
     ],
   )
 
-  const {
-    getComponents,
+  const lunaticResults = useLunatic(source, data, paramsIn)
+
+  /** Hooks in Orchestator&Lunatic pipeline */
+  const { goNextPage, goPreviousPage, compileControls, pageTag } =
+    lunaticResults
+
+  const handleCompileControls = useCallback(() => {
+    const e = compileControls()
+    setErrors(e)
+    return e
+  }, [compileControls])
+
+  const handleGoNextPage = useCallback(() => {
+    if (
+      beforeNextPage({
+        ...lunaticResults,
+        compileControls: handleCompileControls,
+      })
+    ) {
+      startNextPage.current = true
+      goNextPage()
+    } else {
+      startNextPage.current = false
+    }
+  }, [beforeNextPage, goNextPage, lunaticResults, handleCompileControls])
+
+  const handleGoPreviousPage = useCallback(() => {
+    if (
+      beforePreviousPage({
+        ...lunaticResults,
+        compileControls: handleCompileControls,
+      })
+    ) {
+      startPreviousPage.current = true
+      goPreviousPage()
+    }
+  }, [
+    beforePreviousPage,
     goPreviousPage,
-    goNextPage,
-    goToPage,
-    compileControls,
-    pager,
-    pageTag,
-    isFirstPage,
-    isLastPage,
-  } = useLunatic(source, data, paramsIn)
+    handleCompileControls,
+    lunaticResults,
+  ])
+
+  useEffect(() => {
+    if (startNextPage.current) {
+      startNextPage.current = false
+      setErrors(undefined)
+      afterNextPage(lunaticResults)
+    } else if (startPreviousPage.current) {
+      startPreviousPage.current = false
+      afterPreviousPage(lunaticResults)
+    }
+  }, [afterNextPage, afterPreviousPage, lunaticResults, pageTag])
+
+  /** */
 
   const args = useMemo<OrchestatorContext>(
     () => ({
       status: OrchestratorStatus.ACTIVATE,
-      getComponents,
-      goPreviousPage,
-      goNextPage,
-      goToPage,
-      compileControls,
-      pager,
-      pageTag,
-      isFirstPage,
-      isLastPage,
+      ...lunaticResults,
+      errors,
+      compileControls: handleCompileControls,
+      goNextPage: handleGoNextPage,
+      goPreviousPage: handleGoPreviousPage,
     }),
     [
-      compileControls,
-      getComponents,
-      goNextPage,
-      goPreviousPage,
-      goToPage,
-      isFirstPage,
-      isLastPage,
-      pageTag,
-      pager,
+      errors,
+      handleCompileControls,
+      handleGoNextPage,
+      handleGoPreviousPage,
+      lunaticResults,
     ],
   )
 

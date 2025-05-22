@@ -8,13 +8,21 @@ import {
 const ERROR =
   'Unitialize Orchestrator context. Add Orchestrator component in tree parent'
 
-export function useNavigation() {
-  const { goToPage, goNextPage, goPreviousPage, status } =
-    useOrchestratorContext()
-
+function useControlledContext() {
+  const { status, ...rest } = useOrchestratorContext()
   if (status === OrchestratorStatus.EMPTY) {
     throw new Error(ERROR)
   }
+
+  return rest
+}
+
+/**
+ *
+ * @returns
+ */
+export function useNavigation() {
+  const { goToPage, goNextPage, goPreviousPage } = useControlledContext()
 
   const args = useMemo(
     () => ({ goToPage, goPreviousPage, goNextPage }),
@@ -24,33 +32,37 @@ export function useNavigation() {
   return args
 }
 
-export function useComponents() {
-  const context = useOrchestratorContext()
-
-  if (context.status === OrchestratorStatus.EMPTY) {
-    throw new Error(ERROR)
-  }
-
-  return context.getComponents
+/**
+ *
+ * @returns
+ */
+export function useGetComponents() {
+  return useControlledContext().getComponents
 }
 
+/**
+ *
+ * @returns
+ */
 export function useControls() {
-  const { status, compileControls } = useOrchestratorContext()
-
-  if (status === OrchestratorStatus.EMPTY) {
-    throw new Error(ERROR)
-  }
-
-  return compileControls
+  return useControlledContext().compileControls
 }
 
+/**
+ *
+ * @returns
+ */
 export function usePagination() {
-  const { status, pager, isLastPage, isFirstPage, pageTag } =
-    useOrchestratorContext()
+  const { pager, isLastPage, isFirstPage, pageTag } = useControlledContext()
 
-  if (status === OrchestratorStatus.EMPTY) {
-    throw new Error(ERROR)
-  }
+  const args = useMemo(
+    () => ({ pager, isLastPage, isFirstPage, pageTag }),
+    [pager, isLastPage, isFirstPage, pageTag],
+  )
 
-  return { pager, isLastPage, isFirstPage, pageTag }
+  return args
+}
+
+export function useErrors() {
+  return useControlledContext().errors
 }
