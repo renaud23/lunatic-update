@@ -24,6 +24,16 @@ export { LunaticDuration as Duration } from './components/Duration/LunaticDurati
 export { RemoteComponent } from './components/remote-component/remote-component'
 export { LunaticTable as Table } from './components/table/LunaticTable'
 
-export { Orchestrator } from './Orchestrator/Orchestrator'
-export { useComponents, useNavigation } from './Orchestrator/hook'
+export { Orchestrator } from './orchestrator/Orchestrator'
+export { Formulaire } from './orchestrator/Formulaire'
+export type {
+  UseLunaticInterface,
+  LunaticCompiledErrors,
+} from './orchestrator/Orchestrator'
+export {
+  useGetComponents,
+  useNavigation,
+  useControls,
+  usePagination,
+} from './orchestrator/hook'
 export { LunaticComponents } from './components/lunatic-components'
