@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
+import path from 'path'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
@@ -25,8 +26,13 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         api: 'modern-compiler',
-        additionalData: `@forward ./lib/styles/main.scss`,
       },
+    },
+  },
+  resolve: {
+    alias: {
+      '@src': path.resolve(__dirname, './src'),
+      '@lib': path.resolve(__dirname, './lib'),
     },
   },
 })
