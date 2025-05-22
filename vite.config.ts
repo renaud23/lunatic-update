@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import path from 'path'
@@ -7,6 +8,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [
     react(),
+    tailwindcss(),
     dts({ include: ['lib'], tsconfigPath: './tsconfig.app.json' }),
   ],
   build: {

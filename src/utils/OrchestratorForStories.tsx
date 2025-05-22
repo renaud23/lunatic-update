@@ -12,9 +12,11 @@ type OrchestratorForStoriesProps = {
 export function OrchestratorForStories(props: OrchestratorForStoriesProps) {
   const { source, data, navigation } = props
   return (
-    <Orchestrator source={source} data={data}>
-      <Formulaire />
-      <Navigation enabled={navigation} />
-    </Orchestrator>
+    <div className="container grid grid-cols-[1fr_300px] gap-4">
+      <Orchestrator source={source} data={data}>
+        <Formulaire />
+        <Navigation enabled={navigation} />
+      </Orchestrator>
+    </div>
   )
 }
