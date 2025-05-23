@@ -66,3 +66,7 @@ export function usePagination() {
 export function useErrors() {
   return useControlledContext().errors
 }
+
+export function useGetData() {
+  return useControlledContext().getData
+}
