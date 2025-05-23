@@ -164,7 +164,6 @@ export function Orchestrator(
   props: PropsWithChildren<Partial<OrchestratorProps>>,
 ) {
   const { source, data, children, ...rest } = props
-
   if (data && source) {
     return (
       <OrchestratorOnReady source={source} data={data} {...rest}>

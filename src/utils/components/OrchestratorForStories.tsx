@@ -1,7 +1,7 @@
-import { Formulaire, Orchestrator } from '../../lib/main'
-import type { LunaticData } from '../../lib/use-lunatic/type'
-import type { LunaticSource } from '../../lib/use-lunatic/type-source'
-import { Navigation } from './Navigation'
+import { Formulaire, Orchestrator } from '../../../lib/main'
+import type { LunaticData } from '../../../lib/use-lunatic/type'
+import type { LunaticSource } from '../../../lib/use-lunatic/type-source'
+import { Sidebar } from './sidebar/Sidebar'
 
 type OrchestratorForStoriesProps = {
   source?: LunaticSource
@@ -10,12 +10,13 @@ type OrchestratorForStoriesProps = {
 }
 
 export function OrchestratorForStories(props: OrchestratorForStoriesProps) {
-  const { source, data, navigation } = props
+  const { source, data } = props
+
   return (
     <div className="container grid grid-cols-[1fr_300px] gap-4">
       <Orchestrator source={source} data={data}>
         <Formulaire />
-        <Navigation enabled={navigation} />
+        <Sidebar source={source} />
       </Orchestrator>
     </div>
   )

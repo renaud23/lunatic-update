@@ -1,8 +1,8 @@
 {
   "id": "lfrzny8b",
-
-  "pagination": "question",
   "maxPage": "1",
+  "pagination": "question",
+
   "components": [
     {
       "componentType": "Input",
