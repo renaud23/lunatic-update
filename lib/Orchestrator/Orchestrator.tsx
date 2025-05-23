@@ -85,15 +85,15 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
 
   const lunaticResults = useLunatic(source, data, paramsIn)
 
-  /** Hooks in Orchestator&Lunatic pipeline */
   const { goNextPage, goPreviousPage, compileControls, pageTag } =
     lunaticResults
-
   const handleCompileControls = useCallback(() => {
     const e = compileControls()
     setErrors(e)
     return e
   }, [compileControls])
+
+  /** Hooks in Orchestator&Lunatic pipeline */
 
   const handleGoNextPage = useCallback(() => {
     if (

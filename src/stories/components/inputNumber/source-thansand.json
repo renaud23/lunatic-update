@@ -1,0 +1,26 @@
+{
+  "maxPage": "1",
+  "components": [
+    {
+      "id": "kze792d8",
+      "page": "1",
+      "componentType": "InputNumber",
+      "label": { "value": "\"➡ 1. \" || \"Big number \"", "type": "VTL|MD" },
+      "conditionFilter": { "value": "true", "type": "VTL" },
+      "response": { "name": "NB" }
+    }
+  ],
+  "variables": [
+    {
+      "variableType": "COLLECTED",
+      "name": "NB",
+      "values": {
+        "PREVIOUS": null,
+        "COLLECTED": null,
+        "FORCED": null,
+        "EDITED": null,
+        "INPUTED": null
+      }
+    }
+  ]
+}
