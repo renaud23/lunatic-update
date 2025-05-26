@@ -17,17 +17,11 @@ import {
   Provider,
 } from './orchestratorContext'
 
-function alwaysTrue() {
-  return true
-}
-
-function nothing() {}
-
 type Hooks = {
-  beforeNextPage: (args: UseLunaticInterface) => boolean
-  beforePreviousPage: (args: UseLunaticInterface) => boolean
-  afterNextPage: (args: UseLunaticInterface) => void
-  afterPreviousPage: (args: UseLunaticInterface) => void
+  beforeNextPage: (args?: Partial<UseLunaticInterface>) => boolean
+  beforePreviousPage: (args?: Partial<UseLunaticInterface>) => boolean
+  afterNextPage: (args?: Partial<UseLunaticInterface>) => void
+  afterPreviousPage: (args?: Partial<UseLunaticInterface>) => void
 }
 
 export type OrchestratorProps = {
@@ -43,6 +37,8 @@ export type LunaticCompiledErrors = {
   isCritical: boolean
 }
 
+const nullErrors = { currentErrors: undefined, isCritical: false }
+
 function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
   const {
     source,
@@ -54,15 +50,36 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
     autoSuggesterLoading,
     initialPage,
     workersBasePath,
-    beforeNextPage = alwaysTrue,
-    beforePreviousPage = alwaysTrue,
-    afterNextPage = nothing,
-    afterPreviousPage = nothing,
+    beforeNextPage,
+    beforePreviousPage,
+    afterNextPage,
+    afterPreviousPage,
   } = props
 
   const startNextPage = useRef(false)
   const startPreviousPage = useRef(false)
-  const [errors, setErrors] = useState<LunaticCompiledErrors>()
+  const OELListeners = useRef<OrchestatorContext['OELListeners']>({
+    AfterNextPage: () => {},
+    AfterPreviousPage: () => {},
+    BeforeNextPage: () => true,
+    BeforePreviousPage: () => true,
+  })
+  const [errors, setErrors] = useState<LunaticCompiledErrors>(nullErrors)
+
+  useEffect(() => {
+    if (beforeNextPage) {
+      OELListeners.current.BeforeNextPage = beforeNextPage
+    }
+    if (beforePreviousPage) {
+      OELListeners.current.BeforePreviousPage = beforePreviousPage
+    }
+    if (afterNextPage) {
+      OELListeners.current.AfterNextPage = afterNextPage
+    }
+    if (afterPreviousPage) {
+      OELListeners.current.AfterPreviousPage = afterPreviousPage
+    }
+  }, [afterNextPage, afterPreviousPage, beforeNextPage, beforePreviousPage])
 
   const paramsIn = useMemo<Partial<UseLunaticParams>>(
     () => ({
@@ -83,8 +100,10 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
     ],
   )
 
-  const lunaticResults = useLunatic(source, data, paramsIn)
+  /** useLunatic */
+  const lunaticResults: UseLunaticInterface = useLunatic(source, data, paramsIn)
 
+  /** Hooks in Orchestator&Lunatic pipeline */
   const { goNextPage, goPreviousPage, compileControls, pageTag } =
     lunaticResults
   const handleCompileControls = useCallback(() => {
@@ -93,53 +112,35 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
     return e
   }, [compileControls])
 
-  /** Hooks in Orchestator&Lunatic pipeline */
-
   const handleGoNextPage = useCallback(() => {
-    if (
-      beforeNextPage({
-        ...lunaticResults,
-        compileControls: handleCompileControls,
-      })
-    ) {
+    if (OELListeners.current.BeforeNextPage({ ...lunaticResults })) {
       startNextPage.current = true
       goNextPage()
     } else {
       startNextPage.current = false
     }
-  }, [beforeNextPage, goNextPage, lunaticResults, handleCompileControls])
+  }, [goNextPage, lunaticResults])
 
   const handleGoPreviousPage = useCallback(() => {
-    if (
-      beforePreviousPage({
-        ...lunaticResults,
-        compileControls: handleCompileControls,
-      })
-    ) {
+    if (OELListeners.current.BeforePreviousPage({})) {
       startPreviousPage.current = true
       goPreviousPage()
     }
-  }, [
-    beforePreviousPage,
-    goPreviousPage,
-    handleCompileControls,
-    lunaticResults,
-  ])
+  }, [goPreviousPage])
 
   useEffect(() => {
     if (startNextPage.current) {
       startNextPage.current = false
-      setErrors(undefined)
-      afterNextPage(lunaticResults)
+      setErrors(nullErrors)
+      OELListeners.current.AfterNextPage()
     } else if (startPreviousPage.current) {
       startPreviousPage.current = false
-      afterPreviousPage(lunaticResults)
+      OELListeners.current.AfterPreviousPage()
     }
-  }, [afterNextPage, afterPreviousPage, lunaticResults, pageTag])
+  }, [startPreviousPage, lunaticResults, pageTag])
 
-  /** */
-
-  const args = useMemo<OrchestatorContext>(
+  /** context arguments */
+  const forContext = useMemo<OrchestatorContext>(
     () => ({
       status: OrchestratorStatus.ACTIVATE,
       ...lunaticResults,
@@ -147,6 +148,7 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
       compileControls: handleCompileControls,
       goNextPage: handleGoNextPage,
       goPreviousPage: handleGoPreviousPage,
+      OELListeners: OELListeners.current,
     }),
     [
       errors,
@@ -157,13 +159,14 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
     ],
   )
 
-  return <Provider value={args}>{children}</Provider>
+  return <Provider value={forContext}>{children}</Provider>
 }
 
 export function Orchestrator(
   props: PropsWithChildren<Partial<OrchestratorProps>>,
 ) {
   const { source, data, children, ...rest } = props
+
   if (data && source) {
     return (
       <OrchestratorOnReady source={source} data={data} {...rest}>

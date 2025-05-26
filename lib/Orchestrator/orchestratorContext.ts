@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react'
 
 import type { LunaticCompiledErrors, UseLunaticInterface } from './Orchestrator'
+import type { OELCallback, OELPredicate } from './useEventsListerner'
 
 export enum OrchestratorStatus {
   EMPTY = 'EMPTY',
@@ -20,7 +21,14 @@ export type OrchestatorContext = {
   isFirstPage: UseLunaticInterface['isFirstPage']
   pager?: UseLunaticInterface['pager']
 
-  errors?: LunaticCompiledErrors
+  errors: LunaticCompiledErrors
+
+  OELListeners: {
+    BeforeNextPage: OELPredicate
+    AfterNextPage: OELCallback
+    BeforePreviousPage: OELPredicate
+    AfterPreviousPage: OELCallback
+  }
 }
 
 const initial: OrchestatorContext = {
@@ -35,7 +43,14 @@ const initial: OrchestatorContext = {
   pager: undefined,
   isLastPage: false,
   isFirstPage: false,
-  errors: undefined,
+  errors: { currentErrors: undefined, isCritical: false },
+
+  OELListeners: {
+    BeforeNextPage: () => true,
+    AfterNextPage: () => {},
+    BeforePreviousPage: () => true,
+    AfterPreviousPage: () => {},
+  },
 }
 
 const orchestratorContext = createContext<OrchestatorContext>(initial)
