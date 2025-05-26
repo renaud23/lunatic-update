@@ -17,7 +17,7 @@ export { LunaticSequence as Sequence } from './components/sequence/LunaticSequen
 export { Subsequence } from './components/subsequence/Subsequence'
 export { LunaticSuggester as Suggester } from './components/suggester/LunaticSuggester'
 export { LunaticComponentSet as ComponentSet } from './components/componentSet/lunaticComponentSet'
-export { LunaticQuestionExplication as QuestionExplication } from './components/QuestionExplication/lunatic-question-explication'
+export { LunaticQuestionExplication as QuestionExplication } from './components/questionExplication/LunaticQuestionExplication'
 export { QuestionInformation } from './components/questions/question-information'
 export { QuestionContext } from './components/questions/question-context'
 export { LunaticDuration as Duration } from './components/Duration/LunaticDuration'
