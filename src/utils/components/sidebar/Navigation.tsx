@@ -1,5 +1,7 @@
 import { Button, useNavigation, usePagination } from '@lib/main'
 
+import { useOrchestratorControls } from './hooks/useOrchestratorControls'
+
 type NavigationProps = {
   enabled?: boolean
   maxPage?: string
@@ -13,6 +15,8 @@ export function Navigation(props: NavigationProps) {
   const { enabled, maxPage } = props
   const { goNextPage, goPreviousPage, goToPage } = useNavigation()
   const { isFirstPage, isLastPage } = usePagination()
+
+  useOrchestratorControls()
 
   if (enabled) {
     return (

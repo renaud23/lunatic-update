@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import { Button } from '@lib/main'
+import { Button } from '@lib/components/Button/Button'
 import classnames from 'classnames'
 
 import { createCustomizableLunaticField } from '../../commons'
