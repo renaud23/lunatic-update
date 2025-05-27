@@ -7,6 +7,9 @@ import {
   useNavigation,
 } from '@lib/main'
 
+const idBefore = 'CONF_BEFORE'
+const idAfter = 'CONF_AFTER'
+
 export function ModalConfirm() {
   const [display, setDisplay] = useState(false)
   const bypass = useRef(false)
@@ -26,8 +29,8 @@ export function ModalConfirm() {
     bypass.current = false
   }, [])
 
-  useEventsListener(buildBeforeNextPage(beforeNext))
-  useEventsListener(buildAfterNextPage(afterNext))
+  useEventsListener(idBefore, buildBeforeNextPage(beforeNext))
+  useEventsListener(idAfter, buildAfterNextPage(afterNext))
 
   const suivant = useCallback(() => {
     setDisplay(false)

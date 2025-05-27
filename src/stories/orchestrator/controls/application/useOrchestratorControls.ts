@@ -2,6 +2,8 @@ import { useCallback, useState } from 'react'
 
 import { buildBeforeNextPage, useControls, useEventsListener } from '@lib/main'
 
+const idListener = 'CONTROLS_ORCHESTRATOR'
+
 export function useOrchestratorControls() {
   const compile = useControls()
   const [onWarning, setOnWarning] = useState(false)
@@ -18,5 +20,5 @@ export function useOrchestratorControls() {
     return true
   }, [compile, onWarning])
 
-  useEventsListener(buildBeforeNextPage(beforeNext))
+  useEventsListener(idListener, buildBeforeNextPage(beforeNext))
 }

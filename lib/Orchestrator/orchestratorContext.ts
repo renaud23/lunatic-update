@@ -24,10 +24,10 @@ export type OrchestatorContext = {
   errors: LunaticCompiledErrors
 
   OELListeners: {
-    BeforeNextPage: OELPredicate
-    AfterNextPage: OELCallback
-    BeforePreviousPage: OELPredicate
-    AfterPreviousPage: OELCallback
+    BeforeNextPage: Record<string, OELPredicate> & { default: OELPredicate }
+    AfterNextPage: Record<string, OELCallback> & { default: OELCallback }
+    BeforePreviousPage: Record<string, OELPredicate> & { default: OELPredicate }
+    AfterPreviousPage: Record<string, OELCallback> & { default: OELCallback }
   }
 }
 
@@ -46,10 +46,10 @@ const initial: OrchestatorContext = {
   errors: { currentErrors: undefined, isCritical: false },
 
   OELListeners: {
-    BeforeNextPage: () => true,
-    AfterNextPage: () => {},
-    BeforePreviousPage: () => true,
-    AfterPreviousPage: () => {},
+    BeforeNextPage: { default: () => true },
+    AfterNextPage: { default: () => {} },
+    BeforePreviousPage: { default: () => true },
+    AfterPreviousPage: { default: () => {} },
   },
 }
 

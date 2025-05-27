@@ -16,6 +16,7 @@ import {
   OrchestratorStatus,
   Provider,
 } from './orchestratorContext'
+import { executeAllCallbacks, executeAllPredicates } from './useEventsListerner'
 
 type Hooks = {
   beforeNextPage: (args?: Partial<UseLunaticInterface>) => boolean
@@ -39,6 +40,8 @@ export type LunaticCompiledErrors = {
 
 const nullErrors = { currentErrors: undefined, isCritical: false }
 
+const fromProps = 'FROM_PROPS'
+
 function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
   const {
     source,
@@ -59,25 +62,25 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
   const startNextPage = useRef(false)
   const startPreviousPage = useRef(false)
   const OELListeners = useRef<OrchestatorContext['OELListeners']>({
-    AfterNextPage: () => {},
-    AfterPreviousPage: () => {},
-    BeforeNextPage: () => true,
-    BeforePreviousPage: () => true,
+    AfterNextPage: { default: () => {} },
+    AfterPreviousPage: { default: () => {} },
+    BeforeNextPage: { default: () => true },
+    BeforePreviousPage: { default: () => true },
   })
   const [errors, setErrors] = useState<LunaticCompiledErrors>(nullErrors)
 
   useEffect(() => {
     if (beforeNextPage) {
-      OELListeners.current.BeforeNextPage = beforeNextPage
+      OELListeners.current.BeforeNextPage[fromProps] = beforeNextPage
     }
     if (beforePreviousPage) {
-      OELListeners.current.BeforePreviousPage = beforePreviousPage
+      OELListeners.current.BeforePreviousPage[fromProps] = beforePreviousPage
     }
     if (afterNextPage) {
-      OELListeners.current.AfterNextPage = afterNextPage
+      OELListeners.current.AfterNextPage[fromProps] = afterNextPage
     }
     if (afterPreviousPage) {
-      OELListeners.current.AfterPreviousPage = afterPreviousPage
+      OELListeners.current.AfterPreviousPage[fromProps] = afterPreviousPage
     }
   }, [afterNextPage, afterPreviousPage, beforeNextPage, beforePreviousPage])
 
@@ -113,29 +116,29 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
   }, [compileControls])
 
   const handleGoNextPage = useCallback(() => {
-    if (OELListeners.current.BeforeNextPage({ ...lunaticResults })) {
+    if (executeAllPredicates(OELListeners.current.BeforeNextPage)) {
       startNextPage.current = true
       goNextPage()
     } else {
       startNextPage.current = false
     }
-  }, [goNextPage, lunaticResults])
+  }, [goNextPage])
 
   const handleGoPreviousPage = useCallback(() => {
-    if (OELListeners.current.BeforePreviousPage({})) {
+    if (executeAllPredicates(OELListeners.current.BeforePreviousPage)) {
       startPreviousPage.current = true
       goPreviousPage()
     }
   }, [goPreviousPage])
 
   useEffect(() => {
+    setErrors(nullErrors)
     if (startNextPage.current) {
       startNextPage.current = false
-      setErrors(nullErrors)
-      OELListeners.current.AfterNextPage()
+      executeAllCallbacks(OELListeners.current.AfterNextPage)
     } else if (startPreviousPage.current) {
       startPreviousPage.current = false
-      OELListeners.current.AfterPreviousPage()
+      executeAllCallbacks(OELListeners.current.AfterPreviousPage)
     }
   }, [startPreviousPage, lunaticResults, pageTag])
 
