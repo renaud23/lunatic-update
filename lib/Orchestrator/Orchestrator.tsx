@@ -134,11 +134,12 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
   }, [goPreviousPage])
 
   useEffect(() => {
-    setErrors(nullErrors)
     if (startNextPage.current) {
+      setErrors(nullErrors)
       startNextPage.current = false
       executeAllCallbacks(OELListeners.current.AfterNextPage)
     } else if (startPreviousPage.current) {
+      setErrors(nullErrors)
       startPreviousPage.current = false
       executeAllCallbacks(OELListeners.current.AfterPreviousPage)
     }
