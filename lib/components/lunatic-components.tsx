@@ -63,6 +63,7 @@ export function LunaticComponents<T extends Record<string, unknown>>({
           ...component,
           ...componentProps?.(component),
         }
+
         return (
           <Fragment key={'id' in component ? component.id : `index-${k}`}>
             {wrapper({

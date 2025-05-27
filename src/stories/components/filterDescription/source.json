@@ -1,0 +1,17 @@
+{
+  "id": "lfrzny8b",
+  "maxPage": "1",
+  "pagination": "question",
+
+  "components": [
+    {
+      "page": "1",
+      "componentType": "FilterDescription",
+      "filterDescription": true,
+      "label": { "value": "\"I'm a filter description\"", "type": "VTL|MD" },
+      "conditionFilter": { "value": "true", "type": "VTL" },
+      "id": "desc"
+    }
+  ],
+  "variables": []
+}
