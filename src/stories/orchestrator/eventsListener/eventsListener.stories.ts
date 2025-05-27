@@ -6,7 +6,7 @@ import { App } from './App'
 import source from './source.json'
 
 const meta: Meta<typeof App> = {
-  title: 'Orchestrator/eventsListener',
+  title: 'Orchestrator',
   component: App,
 }
 

@@ -35,7 +35,7 @@ export function Formulaire(props: FormulaireProps) {
   }, [componentProps, currentErrors, displayErrors])
 
   return (
-    <form className="card w-150 bg-base-100 shadow-sm min-h-50 p-5">
+    <form>
       <LunaticComponents
         components={components}
         componentProps={getComponentsProps}

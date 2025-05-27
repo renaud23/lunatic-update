@@ -25,6 +25,8 @@ export { RemoteComponent } from './components/remote-component/remote-component'
 export { LunaticTable as Table } from './components/table/LunaticTable'
 export { LunaticRoundabout as Roundabout } from './components/roundabout/LunaticRoundabout'
 
+export { LunaticSummary as Summary } from './components/summary/LunaticSummary'
+
 export { Orchestrator } from './orchestrator/Orchestrator'
 export { Formulaire, type FormulaireProps } from './orchestrator/Formulaire'
 export type {
