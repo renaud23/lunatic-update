@@ -128,6 +128,8 @@ function OrchestratorOnReady(props: PropsWithChildren<OrchestratorProps>) {
     if (executeAllPredicates(OELListeners.current.BeforePreviousPage)) {
       startPreviousPage.current = true
       goPreviousPage()
+    } else {
+      startPreviousPage.current = false
     }
   }, [goPreviousPage])
 

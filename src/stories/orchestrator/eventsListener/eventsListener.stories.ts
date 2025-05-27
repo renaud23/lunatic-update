@@ -1,8 +1,6 @@
-import type { LunaticSource } from '@lib/use-lunatic/type-source'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { App } from './App'
-import source from './source.json'
+import { App } from './application/App'
 
 const meta: Meta<typeof App> = {
   title: 'Orchestrator',
@@ -14,9 +12,5 @@ export default meta
 type Story = StoryObj<typeof App>
 
 export const EventsListener: Story = {
-  args: {
-    source: source as unknown as LunaticSource,
-    data: {},
-    navigation: true,
-  },
+  args: {},
 }
