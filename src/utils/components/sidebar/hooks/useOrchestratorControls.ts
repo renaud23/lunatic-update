@@ -19,5 +19,5 @@ export function useOrchestratorControls() {
     return true
   }, [compile, onWarning])
 
-  useEventsListener(buildBeforeNextPage(beforeNextPage))
+  useEventsListener('CONTROLS', buildBeforeNextPage(beforeNextPage))
 }
