@@ -22,7 +22,7 @@ export { LunaticQuestionExplication as QuestionExplication } from './components/
 export { QuestionInformation } from './components/questions/question-information'
 export { QuestionContext } from './components/questions/question-context'
 export { LunaticDuration as Duration } from './components/Duration/LunaticDuration'
-export { RemoteComponent } from './components/remote-component/remote-component'
+export { RemoteComponent } from './components/remoteComponent/RemoteComponent'
 export { LunaticTable as Table } from './components/table/LunaticTable'
 export { LunaticRoundabout as Roundabout } from './components/roundabout/LunaticRoundabout'
 
