@@ -10,6 +10,7 @@ export { LunaticInputNumber as InputNumber } from './components/input-number/lun
 export { FilterDescription } from './components/filterDescription/component'
 export { Loop } from './components/loop/Loop'
 export { ModalControls as Modal } from './components/modalControls/ModalControls'
+export { LunaticConfirmationModal as ConfirmationModal } from './components/confirmationModal/LunaticConfirmationModal'
 export { PairwiseLinks as PairwiseLinks } from './components/pairwiseLinks/PairwiseLinks'
 export { LunaticRadioGroup as Radio } from './components/radio/lunatic-radio-group'
 export { RosterForLoop } from './components/loop/rosterForLoop/RosterForLoop'
