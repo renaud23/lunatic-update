@@ -1,3 +1,4 @@
+import type { LunaticDatepicker } from '@lib/components/datepicker/LunaticDatepicker'
 import type { LunaticSource } from '@lib/use-lunatic/type-source'
 import { OrchestratorForStories } from '@src/utils/components/OrchestratorForStories'
 import type { Meta, StoryObj } from '@storybook/react'
