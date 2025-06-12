@@ -3,7 +3,7 @@ export { LunaticCheckboxGroup as CheckboxGroup } from './components/checkbox/che
 export { LunaticCheckboxBoolean as CheckboxBoolean } from './components/checkbox/checkbox-boolean/lunatic-checkbox-boolean'
 export { LunaticCheckboxOne as CheckboxOne } from './components/checkbox/checkbox-one/lunatic-checkbox-one'
 export { LunaticDatepicker as Datepicker } from './components/datepicker/LunaticDatepicker'
-export { Declarations } from './components/Declarations/Declarations'
+export { Declarations } from './components/declarations/Declarations'
 export { LunaticDropdown as Dropdown } from './components/dropdown/lunatic-dropdown'
 export { LunaticInput as Input } from './components/input/lunatic-input'
 export { LunaticInputNumber as InputNumber } from './components/input-number/lunatic-input-number'
