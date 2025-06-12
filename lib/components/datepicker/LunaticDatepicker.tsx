@@ -3,7 +3,7 @@ import { getComponentErrors } from '../commons/components/errors/errors'
 import LunaticComponent from '../commons/components/lunatic-component-without-label'
 import useOnHandleChange from '../commons/use-on-handle-change'
 import type { LunaticComponentProps } from '../type'
-import { Datepicker } from './html/datepicker'
+import { Datepicker } from './html/Datepicker'
 
 export const LunaticDatepicker = createCustomizableLunaticField(
   function LunaticDatepicker(props: LunaticComponentProps<'Datepicker'>) {
