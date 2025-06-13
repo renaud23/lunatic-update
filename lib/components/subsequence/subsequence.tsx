@@ -1,7 +1,7 @@
-import DeclarationsAfterText from '../Declarations/DeclarationsAfterText'
-import DeclarationsBeforeText from '../Declarations/DeclarationsBeforeText'
-import DeclarationsDetachable from '../Declarations/DeclarationsDetachable'
 import { createCustomizableLunaticField } from '../commons'
+import DeclarationsAfterText from '../declarations/DeclarationsAfterText'
+import DeclarationsBeforeText from '../declarations/DeclarationsBeforeText'
+import DeclarationsDetachable from '../declarations/DeclarationsDetachable'
 import type { LunaticComponentProps } from '../type'
 
 export const Subsequence = createCustomizableLunaticField(function Subsequence({

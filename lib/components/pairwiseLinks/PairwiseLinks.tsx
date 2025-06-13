@@ -1,7 +1,8 @@
-import DeclarationsAfterText from '../Declarations/DeclarationsAfterText'
-import DeclarationsBeforeText from '../Declarations/DeclarationsBeforeText'
-import DeclarationsDetachable from '../Declarations/DeclarationsDetachable'
+import DeclarationsBeforeText from '@lib/components/declarations/DeclarationsBeforeText'
+
 import NothingToDisplay from '../commons/components/nothing-to-display'
+import DeclarationsAfterText from '../declarations/DeclarationsAfterText'
+import DeclarationsDetachable from '../declarations/DeclarationsDetachable'
 import type { LunaticComponentProps } from '../type'
 import { LinksOrchestrator } from './LinksOrchestrator'
 

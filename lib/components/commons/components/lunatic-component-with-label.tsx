@@ -1,8 +1,9 @@
 import { Fragment, type ReactNode } from 'react'
 
-import DeclarationsBeforeText from '../../Declarations/DeclarationsBeforeText'
-import DeclarationsDetachable from '../../Declarations/DeclarationsDetachable'
-import { DECLARATION_POSITIONS } from '../../Declarations/declarationPositions'
+import DeclarationsBeforeText from '@lib/components/declarations/DeclarationsBeforeText'
+import DeclarationsDetachable from '@lib/components/declarations/DeclarationsDetachable'
+import { DECLARATION_POSITIONS } from '@lib/components/declarations/declarationPositions'
+
 import type { LunaticBaseProps } from '../../type'
 import FieldContainer from './field-container'
 import Label from './label'

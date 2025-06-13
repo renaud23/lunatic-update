@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react'
 
+import DeclarationsAfterText from '@lib/components/declarations/DeclarationsAfterText'
+import DeclarationsBeforeText from '@lib/components/declarations/DeclarationsBeforeText'
+import DeclarationsDetachable from '@lib/components/declarations/DeclarationsDetachable'
+
 import D from '../../../i18n'
 import { times } from '../../../utils/array'
-import DeclarationsAfterText from '../../Declarations/DeclarationsAfterText'
-import DeclarationsBeforeText from '../../Declarations/DeclarationsBeforeText'
-import DeclarationsDetachable from '../../Declarations/DeclarationsDetachable'
 import { createCustomizableLunaticField } from '../../commons'
 import { Table, Tbody, Td, Tr } from '../../commons/components/html-table'
 import { LunaticComponents } from '../../lunatic-components'
