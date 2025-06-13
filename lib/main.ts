@@ -21,7 +21,7 @@ export { LunaticComponentSet as ComponentSet } from './components/componentSet/l
 export { LunaticQuestionExplication as QuestionExplication } from './components/questionExplication/LunaticQuestionExplication'
 export { QuestionInformation } from './components/questions/question-information'
 export { QuestionContext } from './components/questions/question-context'
-export { LunaticDuration as Duration } from './components/Duration/LunaticDuration'
+export { LunaticDuration as Duration } from './components/duration/LunaticDuration'
 export { RemoteComponent } from './components/remoteComponent/RemoteComponent'
 export { LunaticTable as Table } from './components/table/LunaticTable'
 export { LunaticRoundabout as Roundabout } from './components/roundabout/LunaticRoundabout'

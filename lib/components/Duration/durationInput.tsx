@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react'
 
-import { objectKeys } from '../../utils/object'
+import { objectKeys } from '@lib/utils/object'
+
 import { type Formats, labelByUnit, propsByUnit } from './durationUtils'
 import { formatDuration } from './formatDuration'
 import { getDurationFromValue } from './getDurationFromValue'
