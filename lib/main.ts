@@ -4,7 +4,7 @@ export { LunaticCheckboxBoolean as CheckboxBoolean } from './components/checkbox
 export { LunaticCheckboxOne as CheckboxOne } from './components/checkbox/checkbox-one/lunatic-checkbox-one'
 export { LunaticDatepicker as Datepicker } from './components/datepicker/LunaticDatepicker'
 export { Declarations } from './components/declarations/Declarations'
-export { LunaticDropdown as Dropdown } from './components/dropdown/lunatic-dropdown'
+export { LunaticDropdown as Dropdown } from './components/dropdown/lunaticDropdown'
 export { LunaticInput as Input } from './components/input/lunatic-input'
 export { LunaticInputNumber as InputNumber } from './components/input-number/lunatic-input-number'
 export { FilterDescription } from './components/filterDescription/component'

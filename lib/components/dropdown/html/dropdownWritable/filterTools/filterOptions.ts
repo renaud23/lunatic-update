@@ -1,4 +1,4 @@
-import { getLabel } from './get-label'
+import { getLabel } from './getLabel'
 import { match } from './match'
 
 /** */

@@ -1,11 +1,12 @@
 import { type ReactNode, useCallback, useState } from 'react'
 
-import type { LunaticError } from '../../../../use-lunatic/type'
-import { ComboBox } from '../../../commons'
-import type { ComboBoxOptionType } from '../../../commons/components/combo-box/combo-box.type'
-import { filterOptions } from './filter-tools/filter-options'
-import { WritableLabelRenderer } from './writable-label-renderer'
-import { WritableOptionRenderer } from './writable-option-renderer'
+import { ComboBox } from '@lib/components/commons'
+import type { ComboBoxOptionType } from '@lib/components/commons/components/combo-box/combo-box.type'
+import type { LunaticError } from '@lib/use-lunatic/type'
+
+import { filterOptions } from './filterTools/filterOptions'
+import { WritableLabelRenderer } from './writableLabelRenderer'
+import { WritableOptionRenderer } from './writableOptionRenderer'
 
 type Props = {
   id?: string

@@ -1,8 +1,9 @@
-import type { LunaticError } from '../../../use-lunatic/type'
-import { createCustomizableLunaticField } from '../../commons'
-import type { LunaticComponentProps } from '../../type'
-import { DropdownSimple } from './dropdown-simple/dropdown-simple'
-import { DropdownWritable } from './dropdown-writable/dropdown-writable'
+import { createCustomizableLunaticField } from '@lib/components/commons/createCustomizableField'
+import type { LunaticComponentProps } from '@lib/components/type'
+import type { LunaticError } from '@lib/use-lunatic/type'
+
+import { DropdownSimple } from './dropdownSimple/dropdownSimple'
+import { DropdownWritable } from './dropdownWritable/dropdownWritable'
 
 export type DropdownProps = {
   onSelect: (v: string | null) => void

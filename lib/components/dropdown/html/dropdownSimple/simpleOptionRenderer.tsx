@@ -1,6 +1,5 @@
+import type { ComboBoxOptionType } from '@lib/components/commons/components/combo-box/combo-box.type'
 import classnames from 'classnames'
-
-import type { ComboBoxOptionType } from '../../../commons/components/combo-box/combo-box.type'
 
 type Props = {
   option: ComboBoxOptionType

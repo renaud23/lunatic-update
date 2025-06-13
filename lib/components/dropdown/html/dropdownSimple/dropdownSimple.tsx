@@ -1,7 +1,8 @@
-import { ComboBox } from '../../../commons'
+import { ComboBox } from '@lib/components/commons'
+
 import { type DropdownProps } from '../dropdown'
-import { SimpleLabelRenderer } from './simple-label-renderer'
-import { SimpleOptionRenderer } from './simple-option-renderer'
+import { SimpleLabelRenderer } from './simpleLabelRenderer'
+import { SimpleOptionRenderer } from './simpleOptionRenderer'
 
 export function DropdownSimple({
   id,
